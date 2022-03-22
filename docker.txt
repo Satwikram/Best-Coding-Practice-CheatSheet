@@ -1,0 +1,32 @@
+Building and running the docker
+docker-compose build
+
+docker-compose up
+
+docker run -dit --name mongo_db -p 27017:27017 mongo #MongoDB
+
+docker run # Converts Image to Container
+
+docker run -ti ubuntu:latest bash # ti indicates terminal interactive 
+
+docker ps # Prints all the running images
+
+docker ps --format $FORMAT
+
+docker commit ID
+
+docker tag ID my-image
+
+docker run --rm -ti ubuntu sleep 5
+
+Attaching and executing the container
+docker attach container_name
+
+docker exec # For debugging
+
+Killing and Removing the containers
+docker kill container_name # Kills the existing container
+
+docker rm container_name # Removes the existing container
+
+Exposing ports
