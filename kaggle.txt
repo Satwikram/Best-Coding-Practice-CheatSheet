@@ -1,0 +1,23 @@
+from google.colab import files
+
+files.upload()
+
+
+! mkdir ~/.kaggle
+
+
+! cp kaggle.json ~/.kaggle/
+
+! chmod 600 ~/.kaggle/kaggle.json
+
+
+!apt-get install texlive texlive-xetex texlive-latex-extra pandoc
+!pip install pypandoc
+
+!jupyter nbconvert --to PDF "Untitled.ipynb"
+
+shutil.make_archive(output_filename, 'zip', dir_name)
+
+pip list --format=freeze > requirements
+
+conda env remove --name ENVIRONMENT
