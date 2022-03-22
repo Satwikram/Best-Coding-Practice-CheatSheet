@@ -1,0 +1,13 @@
+clear && clear && nvidia-smi && free -h
+
+sudo supervisorctl restart all
+
+To uninstall the NVIDIA Driver, run nvidia-uninstall
+
+sudo reboot (restart VM)
+
+sudo kill -9 PID
+
+watch -n 2 nvidia-smi
+
+sudo fdisk -l|grep Disk
