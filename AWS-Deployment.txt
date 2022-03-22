@@ -1,0 +1,79 @@
+Author: Satwik Ram K
+
+AWS Deployment Steps:
+
+git clone
+
+pyhthon3 -m virtualenv vmitis
+
+source vmitis/bin/activate
+
+pip3 install gunicorn
+
+sudo apt-get install -y nginx
+
+Change the AWS HTTP Outbound Anywhere
+
+sudo nginx
+
+gunicorn --bind 0.0.0.0:8000 vmitis_rest.wsgi:application
+sudo apt-get install -y supervisor
+
+cd /etc/supervisor/conf.d/
+
+sudo touch gunicorn.conf
+
+sudo nano gunicorn.conf
+
+[program:gunicorn]
+directory=/home/ubuntu/avkara
+command=/home/ubuntu/avkara-env/bin/gunicorn --workers 3 --bind unix:/home/ubuntu/avkara/app.sock avkara.wsgi:application
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/gunicorn/gunicron.err.log
+stdout_logfile=/var/log/gunicorn/gunicorn.out.log
+
+[group:guni]
+programs:gunicorn
+
+
+sudo mkdir /var/log/gunicorn
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl status
+
+cd /etc/nginx/sites-available/
+cat default
+
+sudo touch django.conf
+
+sudo nano django.conf
+
+server {
+       listen 80;
+
+       server_name ec2-18-217-228-128.us-east-2.compute.amazonaws.com;
+
+       location = /favicon.ico { access_log off; log_not_found off; }
+       location / {
+                include proxy_params;
+                proxy_pass http://unix:/home/ubuntu/avkara/app.sock;
+
+       }
+
+       location /static/ {
+		autoindex on;
+		alias /home/ubuntu/avkara/static/;
+	}
+}
+
+cd ..
+
+sudo nano nginx.conf
+
+sudo nginx -t
+sudo ln django.conf /etc/nginx/sites-enabled/
+
+sudo service nginx restart
+
+sudo systemctl reload nginx
