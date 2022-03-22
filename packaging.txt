@@ -1,0 +1,10 @@
+poetry export -f requirements.txt -o requirements.txt --without-hashes  
+
+python -m pip install -r .\requirements.txt --target .\dist\app  
+
+copy -r .\src\* .\dist\app\src\  
+
+python -m zipapp -p "interpreter" -m "src.main:main" dist\app test.pyz   
+
+#Compression
+python -m zipapp -p "interpreter" -m "src.main:main" dist\app -o test.pyz -c 
