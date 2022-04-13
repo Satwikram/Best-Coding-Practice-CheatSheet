@@ -1,0 +1,11 @@
+Create cron.txt file
+
+nano cron.txt
+
+15 10 15 21 * usr/bin/python test.py
+
+crontab cron.txt
+
+crontab -l to check the cron jobs
+
+crontab -r to delete the cron jobs
