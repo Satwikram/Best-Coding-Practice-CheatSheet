@@ -87,7 +87,14 @@ git pull origin branchname --allow-unrelated-histories
 
 git branch -d <branch name>
 
+When it is not fully merged.
+
+git branch -D <branch name>
+
 git remote set-url origin <url>
 
 23 Change all the past commits user name and email to current email and user.
 git rebase --root --exec "git commit --amend --no-edit --date 'now' --reset-author"
+
+24. Change the git URI(url)
+git remote set-url origin url
