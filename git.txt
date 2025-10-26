@@ -98,3 +98,6 @@ git rebase --root --exec "git commit --amend --no-edit --date 'now' --reset-auth
 
 24. Change the git URI(url)
 git remote set-url origin url
+
+25. Reset Git and .gitignore
+ni .gitignore -Force
